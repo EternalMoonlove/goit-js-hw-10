@@ -1,12 +1,19 @@
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+
 const startBtn = document.querySelector('[data-start]');
 const datePicker = document.querySelector('#datetime-picker');
-let selectedTime = null;
-let timerId = null;
 
 const daysEl = document.querySelector('[data-days]');
 const hoursEl = document.querySelector('[data-hours]');
 const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
+
+let selectedTime = null;
+let timerId = null;
 
 flatpickr(datePicker, {
   enableTime: true,
@@ -17,8 +24,8 @@ flatpickr(datePicker, {
     selectedTime = selectedDates[0];
     if (selectedTime <= Date.now()) {
       iziToast.error({
-        title: 'Помилка',
-        message: 'Будь ласка, виберіть дату у майбутньому.',
+        title: 'Error',
+        message: 'Please choose a date in the future',
         position: 'topRight',
       });
       startBtn.disabled = true;
